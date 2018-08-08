@@ -1,10 +1,10 @@
-from django.conf.urls import url
-import views
+from django.urls import path
+from . import views as v
 
 
 urlpatterns = [
-
-    url(r'^$', views.index, name='index'),
-    url(r'^list/', views.list, name='list'),
-    url(r'^add/', views.add, name='add')
+    path('', v.index, name='home'),
+    path('list', v.list, name='list'),
+    path('add', v.add, name='add'),
+    path('delete/<int:id>', v.delete, name='delete')
 ]

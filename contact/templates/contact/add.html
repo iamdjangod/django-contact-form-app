@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load mytags %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="jumbotron">
+      <div class="container">
+          <div class="col-sm-8">
+            {% if messages %}
+                <ul class="list-unstyled messages" style="margin-top: 50px">
+                      {% for message in messages %}
+                        {% get_bootstrap_alert_msg_css_name message.tags as alert_tag %}
+                        <center class="alert alert-{{ alert_tag }}">{{ message }}</center>
+                      {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+          <div class="col-md-6 col-md-offset-3" style="margin-top: 100px">
+          <center><h3>Kindly Fill Form to Submit details</h3></center>
+            <form role="form" action="" method="post" id="contact_wrap" class="form-horizontal">
+                {% csrf_token %}
+                <div class="form-group">
+                    {% render_field form.name placeholder="Enter Your Name" class="form-control" %}
+                    {{ form.name.errors }}
+                </div>
+                <div class="form-group">
+                    {% render_field form.email placeholder="Enter Your email" class="form-control" %}
+                    {{ form.email.errors }}
+                </div>
+                <button class="btn bg-info btn-block" type="submit">Submit</button>
+            </form>
+      </div>
+        </div>
+</div>
+{% endblock %}
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+<script>
+$(function() {
+    $( "#contact_wrap" ).validate({
+
+        errorClass: "my-error-class", //apply a css class for error if you have style for valid
+        validClass: "my-valid-class", //apply a css class for error if you have style for error
+
+        rules: {
+            name: {
+                required: true
+            },
+
+            email: {
+                required: true
+            },
+
+        },
+        messages: {
+            name: {
+                required: "Please enter your Name."
+            },
+            email: {
+                required: "Please enter your Email."
+            },
+        },
+    });
+
+});
+</script>

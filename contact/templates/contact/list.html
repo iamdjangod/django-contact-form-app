@@ -1,10 +1,10 @@
-{% extends 'contact/base.html' %}
+{% extends 'base.html' %}
 {% load mytags %}
 {% block content %}
     <div class="container">
       <!-- Example row of columns -->
       {% if messages %}
-                      <ul class="list-unstyled messages">
+                      <ul class="list-unstyled messages" style="margin-top: 50px">
                       {% for message in messages %}
                         {% get_bootstrap_alert_msg_css_name message.tags as alert_tag %}
                         <center class="alert alert-{{ alert_tag }}">{{ message }}</center>
@@ -17,11 +17,12 @@
             {% for contact in contacts %}
           <h2>{{ contact.name }}</h2>
           <p>{{ contact.email }}</p>
+          <p><a class="btn btn-danger btn-sm" href="{% url 'delete' id=contact.pk%}">Delete</a></p>
              {% endfor %}
         </div>
       {% else %}
-          <div class="col-md-4">
-                <p>There are no contacts present</p>
+          <div class="alert alert-danger col-md-8">
+              <center><p><strong>There are no SeedStars contacts present</strong></p></center>
           </div>
       </div>
       </div>

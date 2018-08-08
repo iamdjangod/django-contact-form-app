@@ -5,11 +5,9 @@ from django.db import models
 # Create your models here.
 
 
-
 class Contact(models.Model):
-    name = models.CharField(max_length=200)
-    email = models.EmailField(max_length=128)
+    name = models.CharField(max_length=200, blank=False)
+    email = models.EmailField(max_length=128, blank=False)
 
-    def __unicode__(self):
-        return "{0} {1} {2}".format(
-            self, self.name, self.email)
+    def __str__(self):
+        return self.name
